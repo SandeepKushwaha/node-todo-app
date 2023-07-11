@@ -1,3 +1,5 @@
 module.exports.index = function (request, response) { 
-    return response.end('<h1>TOTO App Home</h1>');
+    return response.render('index', {
+        title: 'TODO App',
+    });
 };
