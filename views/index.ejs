@@ -6,14 +6,50 @@
     <title>
         <%= locals.title %>
     </title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
     <div class="container">
         <header>
             <h1 class="app-title"><%= locals.title %></h1>
         </header>
-        <div class="main"></div>
-        <footer></footer>
+        <main>
+            <section class="new-todo">
+                <form action="" method="get">
+                    <div class="row">
+                        <label for="desc">Description</label>
+                        <input type="text" name="desc" id="desc" />
+                        <!-- <textarea name="desc" id="desc" cols="30" rows="6"></textarea> -->
+                    </div>
+                    <div class="row">
+                        <label for="categories">Category</label>
+                        <select id="categories">  
+                            <option>Choose a category</option>  
+                            <option value="yellow" style="color: violet;">Violet</option>  
+                            <option value="white" style="color: blue;">Blue</option>  
+                            <option value="black" style="color: black;">Black</option>  
+                            <option value="green" style="color: green;">green</option>  
+                            <option value="red" style="color: red;">Red</option>  
+                        </select> 
+                    </div>
+                    <div class="row">
+                        <label for="dot">Due date</label>
+                        <input id="dot" type="date" />
+                    </div>
+                    <div class="row">
+                        <input type="submit" value="Add Task" />
+                        <input type="button" value="Delete">
+                    </div>
+                </form>
+            </section>
+            <section class="todos">
+                list will be here.
+            </section>
+        </main>
+        <footer>
+            <p>Author:: Sandeep Kumar Kushwaha</p>
+        </footer>
     </div>
+    <script type="text/javascript" src="./js/script.js"></script>
 </body>
 </html>
