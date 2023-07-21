@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="/css/app.css">
+<section style="padding-bottom: 12px;">
+    <form class="edit-form" action="/edit-todo?id=<%= todoItem.id %>" method="post">
+        <div class="row">
+            <label for="desc">Description</label>
+            <input type="text" name="desc" id="desc" value="<%= todoItem.discription %>"/>
+        </div>
+        <div class="row">
+            <label for="category">Category</label>
+            <select id="category" name="category">  
+                <option value="<%= todoItem.category %>" disabled selected><%= todoItem.category %></option>  
+                <option value="Personal">Personal</option>
+                <option value="Work">Work</option>
+                <option value="Cleaning">Cleaning</option>
+                <option value="Others">Others</option>
+            </select> 
+        </div>
+        <div class="row">
+            <label for="dot">Due date</label>
+            <input id="dot" name="date" type="date" value="<%= todoItem.dueDate %>" />
+        </div>
+        <div class="row horizental">
+            <input style="width: 20%;" type="submit" id="submit-btn" value="Update Task" />
+        </div>
+    </form>
+</section>

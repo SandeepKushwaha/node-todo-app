@@ -1,54 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <%= locals.title %>
-    </title>
-    <link rel="stylesheet" href="./css/style.css">
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1 class="app-title"><%= locals.title %></h1>
-        </header>
-        <main>
-            <section class="new-todo">
-                <form action="" method="get">
-                    <div class="row">
-                        <label for="desc">Description</label>
-                        <input type="text" name="desc" id="desc" />
-                        <!-- <textarea name="desc" id="desc" cols="30" rows="6"></textarea> -->
+<link rel="stylesheet" href="/css/app.css">
+<div class="container">
+    
+    <main>
+        <section class="new-todo">
+            <form action="/create-todo" method="post">
+                <div class="row">
+                    <label for="desc">Description</label>
+                    <input type="text" name="desc" id="desc" />
+                    <!-- <textarea name="desc" id="desc" cols="30" rows="6"></textarea> -->
+                </div>
+                <div class="row">
+                    <label for="category">Category</label>
+                    <select id="category" name="category">  
+                        <option value="" disabled selected>Choose a category</option>  
+                        <option value="Personal">Personal</option>
+                        <option value="Work">Work</option>
+                        <option value="Cleaning">Cleaning</option>
+                        <option value="Others">Others</option>
+                    </select> 
+                </div>
+                <div class="row">
+                    <label for="dot">Due date</label>
+                    <input id="dot" name="date" type="date" />
+                </div>
+                <div class="row horizental">
+                    <input class="shift-left" type="submit" id="submit-btn" value="Add Task" />
+                    <input class="shift-right" type="button" id="delete-btn" value="Delete">
+                </div>
+            </form>
+        </section>
+        <section class="todos">
+            <ul>
+                <!-- <li>
+                    <div class="checkbox-data">
+                        <input type="checkbox" name="deletecheck" class="deletecheck" />
+                        <div class="txt-data">
+                            <p>This is text Description.</p>
+                            <p>20 July 2023</p>
+                        </div>
                     </div>
-                    <div class="row">
-                        <label for="categories">Category</label>
-                        <select id="categories">  
-                            <option value="" disabled selected>Choose a category</option>  
-                            <option>Personal</option>
-                            <option>Work</option>
-                            <option>Claeaning</option>
-                            <option>Otheres</option>
-                        </select> 
+                    <span class="category">category</span> 
+                    <div class="actions">
+                        <span><a class="btn-edit" href="#">edit</a></span>
                     </div>
-                    <div class="row">
-                        <label for="dot">Due date</label>
-                        <input id="dot" type="date" />
+                </li> -->
+                <% for (let i of todoList) { %>
+                <li>
+                    <div class="checkbox-data">
+                        <input type="checkbox" name="deletecheck" class="deletecheck" onclick="checkedOrNot()" itemid="<%= i.id %>" />
+                        <div class="txt-data">
+                            <p id="<%= i.id %>" class="display-text"><%= i.discription %></p>
+                            <p id="<%= i.id + i.dueDate %>" class="due-date"><%= i.dueDate %></p>
+                        </div>
                     </div>
-                    <div class="row">
-                        <input type="submit" value="Add Task" />
-                        <input type="button" value="Delete">
+                    <span class="category"><%= i.category %></span> 
+                    <div class="actions">
+                        <span><a class="btn-edit" id="edit-todo-item" href="/edit?id=<%= i.id %>">edit</a></span>
                     </div>
-                </form>
-            </section>
-            <section class="todos">
-                list will be here.
-            </section>
-        </main>
-        <footer>
-            <p>Author:: Sandeep Kumar Kushwaha</p>
-        </footer>
-    </div>
-    <script type="text/javascript" src="./js/script.js"></script>
-</body>
-</html>
+                </li>
+                <% } %>
+            </ul>
+        </section>
+    </main>
+</div>
+<script type="text/javascript" src="./js/script.js"></script>
