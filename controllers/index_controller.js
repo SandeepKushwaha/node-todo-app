@@ -1,6 +1,7 @@
+const TODOLists = require('../models/todo_list');
 const ToDoLists = require('../models/todo_list');
 
-module.exports.index = function (request, response) { 
+module.exports.indexPage = function (request, response) {
     // fetching list data
     ToDoLists.find({})
         .then(todo => {
@@ -60,7 +61,7 @@ module.exports.delete = function (request, response) {
 }
 
 // update page
-module.exports.update = function (request, response) {
+module.exports.updatePage = function (request, response) {
     ToDoLists.findById(request.query.id)
         .then(listItem => {
             console.log("getting data for ::", request.query.id);
@@ -72,6 +73,33 @@ module.exports.update = function (request, response) {
         })
         .catch(error => {
             console.log('Error::', error);
+            // Handle the error, e.g., render an error page or redirect
+        });
+}
+
+// update todo
+module.exports.edit = function (request, response) {
+    const editTodoId = request.query.id;
+    const editDiscription = request.body.desc;
+    const editCategory = request.body.category;
+    const editDueDate = request.body.date;
+
+    ToDoLists.updateOne(
+        { _id: editTodoId },
+        {
+            $set: {
+                discription: editDiscription,
+                category: editCategory,
+                dueDate: editDueDate
+            }
+        }
+    )
+        .then(todoData => {
+            console.log('updated data::', todoData);
+            return response.redirect('/');
+        })
+        .catch(error => {
+            console.log('Error while updating::', error);
             // Handle the error, e.g., render an error page or redirect
         });
 }
